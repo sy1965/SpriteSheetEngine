@@ -15,6 +15,7 @@ const offsetXInput = document.getElementById('offsetX');
 const offsetYInput = document.getElementById('offsetY');
 const resetPosBtn = document.getElementById('resetPosBtn');
 const exportBtn = document.getElementById('exportBtn');
+const lockGridBtn = document.getElementById('lockGridBtn');
 const lockedCountDisplay = document.getElementById('lockedCount');
 const totalCellsCountDisplay = document.getElementById('totalCellsCount');
 const lockedListDisplay = document.getElementById('lockedList');
@@ -337,6 +338,22 @@ clearFrameBtn.addEventListener('click', () => {
 resetPosBtn.addEventListener('click', () => {
     resetAlignment();
     draw();
+});
+
+lockGridBtn.addEventListener('click', () => {
+    if (!spriteImage.complete || spriteImage.naturalWidth === 0) {
+        alert("Please upload an image first.");
+        return;
+    }
+    const cellW = parseInt(cellWidthInput.value);
+    const cellH = parseInt(cellHeightInput.value);
+    
+    if (cellW > 0 && cellH > 0) {
+        gridColsInput.value = Math.floor(spriteImage.width / cellW);
+        gridRowsInput.value = Math.floor(spriteImage.height / cellH);
+        resizeCanvas();
+        draw();
+    }
 });
 
 imageUpload.addEventListener('change', (e) => {
