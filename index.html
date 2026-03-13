@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Sheet Engine</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Sprite Sheet Engine</h1>
+            <div class="nav-container">
+                <p>Upload a sprite sheet and run it instantly</p>
+                <a href="editor.html" class="nav-link">Go to Grid Editor</a>
+            </div>
+        </header>
+
+        <main>
+            <div class="preview-area">
+                <div class="canvas-container">
+                    <canvas id="spriteCanvas" aria-label="Sprite preview canvas"></canvas>
+                </div>
+            </div>
+
+            <div class="controls">
+                <div id="customUploadSection" class="control-group upload-group">
+                    <label>Upload Exported Sheet:</label>
+                    <div class="upload-btn-wrapper">
+                        <button class="secondary-btn">Select File</button>
+                        <input type="file" id="runnerImageUpload" accept="image/*" />
+                    </div>
+                    <p class="hint-text">Sheet Size: <span id="sheetMeta">No file selected</span></p>
+                    <div class="input-grid">
+                        <div class="small-input">
+                            <label for="customCols">Cols</label>
+                            <input type="number" id="customCols" value="3" min="1">
+                        </div>
+                        <div class="small-input">
+                            <label for="customRows">Rows</label>
+                            <input type="number" id="customRows" value="4" min="1">
+                        </div>
+                        <div class="small-input">
+                            <label for="customFrameWidth">Frame W</label>
+                            <input type="number" id="customFrameWidth" value="0" min="1">
+                        </div>
+                        <div class="small-input">
+                            <label for="customFrameHeight">Frame H</label>
+                            <input type="number" id="customFrameHeight" value="0" min="1">
+                        </div>
+                    </div>
+                    <button id="applyCustomBtn" class="primary-btn full-width">Apply & Play</button>
+                    <p id="customUploadHint" class="hint-text"></p>
+                    <p class="hint-text">Playback order: Row 1 left to right, then Row 2, Row 3, and so on.</p>
+                </div>
+
+                <div class="control-group slider-group">
+                    <label for="fpsSlider">Speed: <span id="fpsValue">10</span> FPS</label>
+                    <input type="range" id="fpsSlider" min="1" max="60" value="10">
+                </div>
+
+                <div class="control-group">
+                    <label for="configText">Generated Config Text</label>
+                    <textarea id="configText" rows="7" readonly></textarea>
+                    <button id="copyConfigBtn" class="secondary-btn full-width">Copy To Clipboard</button>
+                    <p id="copyStatus" class="hint-text"></p>
+                </div>
+
+                <div class="control-group main-actions">
+                    <button id="playPauseBtn" class="primary-btn">Pause</button>
+                    <button id="resetBtn" class="secondary-btn">Reset</button>
+                </div>
+                
+                <div class="info-group">
+                    <p>Frame: <span id="currentFrame">0</span> / <span id="totalFramesDisplay">0</span></p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built for visual excellence</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
