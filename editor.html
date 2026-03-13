@@ -221,9 +221,11 @@
                     <input type="range" id="cellZoom" min="10" max="400" value="100">
                 </div>
 
-                <div class="action-btns" style="margin-top: 8px;">
-                    <button id="lockFrameBtn" class="primary-btn">Lock Frame</button>
-                    <button id="clearFrameBtn" class="secondary-btn">Clear Cell</button>
+                <div class="action-btns" style="margin-top: 8px; grid-template-columns: 1fr 1fr;">
+                    <button id="lockFrameBtn" class="primary-btn" style="grid-column: span 2;">Lock Frame</button>
+                    <button id="lockRowBtn" class="secondary-btn" style="font-size: 0.8rem;">Lock Row</button>
+                    <button id="lockColBtn" class="secondary-btn" style="font-size: 0.8rem;">Lock Col</button>
+                    <button id="clearFrameBtn" class="secondary-btn" style="grid-column: span 2;">Clear Cell</button>
                 </div>
             </div>
 

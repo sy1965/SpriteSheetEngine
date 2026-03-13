@@ -11,6 +11,8 @@ const activeCellLabel = document.getElementById('activeCellLabel');
 const cellLockStatus = document.getElementById('cellLockStatus');
 const lockFrameBtn = document.getElementById('lockFrameBtn');
 const clearFrameBtn = document.getElementById('clearFrameBtn');
+const lockRowBtn = document.getElementById('lockRowBtn');
+const lockColBtn = document.getElementById('lockColBtn');
 const offsetXInput = document.getElementById('offsetX');
 const offsetYInput = document.getElementById('offsetY');
 const resetPosBtn = document.getElementById('resetPosBtn');
@@ -164,24 +166,24 @@ function draw() {
     ctx.save();
     for (let i = 0; i <= cols; i++) {
         const x = i * cellW;
-        ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)'; // Sharper blue
         ctx.setLineDash([]);
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
         
         if (i < cols) {
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)'; // Sharper sub-grid
             ctx.setLineDash([5, 5]);
             ctx.beginPath(); ctx.moveTo(x + cellW/2, 0); ctx.lineTo(x + cellW/2, canvas.height); ctx.stroke();
         }
     }
     for (let j = 0; j <= rows; j++) {
         const y = j * cellH;
-        ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)';
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.8)'; // Sharper blue
         ctx.setLineDash([]);
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
         
         if (j < rows) {
-            ctx.strokeStyle = 'rgba(56, 189, 248, 0.15)';
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.4)'; // Sharper sub-grid
             ctx.setLineDash([5, 5]);
             ctx.beginPath(); ctx.moveTo(0, j * cellH + cellH/2); ctx.lineTo(canvas.width, j * cellH + cellH/2); ctx.stroke();
         }
@@ -325,6 +327,24 @@ function lockFrame() {
     lockedFrames[key] = { x: imgX, y: imgY, scale: imgScale };
     draw();
 }
+
+lockRowBtn.addEventListener('click', () => {
+    const cols = parseInt(gridColsInput.value);
+    for (let c = 0; c < cols; c++) {
+        const key = `${activeCell.r}-${c}`;
+        lockedFrames[key] = { x: imgX, y: imgY, scale: imgScale };
+    }
+    draw();
+});
+
+lockColBtn.addEventListener('click', () => {
+    const rows = parseInt(gridRowsInput.value);
+    for (let r = 0; r < rows; r++) {
+        const key = `${r}-${activeCell.c}`;
+        lockedFrames[key] = { x: imgX, y: imgY, scale: imgScale };
+    }
+    draw();
+});
 
 lockFrameBtn.addEventListener('click', lockFrame);
 
